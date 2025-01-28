@@ -1,0 +1,14 @@
+{
+  "name": "authentication",
+  "version": "1.0.0",
+  "description": "api para el manejo de la autenticacion de la aplicacion myleague",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "zwei",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}
