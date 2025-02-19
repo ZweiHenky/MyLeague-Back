@@ -1,7 +1,7 @@
 const {UserSchema, LoginSchema} = require("../schemas/UserSchema")
 
 const bcrypt =  require("bcryptjs")
-const { create, get } = require("../repositories/UserRepository")
+const { create, get, getByEmail, getByPhone } = require("../repositories/UserRepository")
 const { generateToken, generateRefreshToken } = require("../utils/jwtUtils")
 
 
@@ -10,6 +10,18 @@ exports.RegisterService = async (data) =>{
     
     if (error) {
         throw new Error(error.details[0].message)
+    }
+
+    const validate_email = await getByEmail(value.usu_email)
+
+    if (validate_email) {
+        throw new Error("El correo ya esta en uso")
+    }
+
+    const validate_phone = await getByPhone(value.usu_tel)
+
+    if (validate_phone) {
+        throw new Error("El telefono ya esta en uso")
     }
 
     const salt  = bcrypt.genSaltSync(10)
