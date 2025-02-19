@@ -22,7 +22,8 @@ exports.register = async (req, res, next) => {
     try {
         await RegisterService(req.body)
         res.status(200).json({
-            message:"El usuario ha sido registrado"
+            message:"El usuario ha sido registrado",
+            status:true
         })
     } catch (error) {
         next(error)
