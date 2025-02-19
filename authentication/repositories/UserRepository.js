@@ -14,3 +14,17 @@ exports.get = async (data) =>{
 
     return result
 }
+
+exports.getByEmail = async (usu_email) =>{
+
+    const [result] = await sql`SELECT * FROM users WHERE usu_email = ${usu_email}`
+
+    return result
+}
+
+exports.getByPhone = async (usu_tel) =>{
+
+    const [result] = await sql`SELECT * FROM users WHERE usu_tel = ${usu_tel}`
+
+    return result
+}
