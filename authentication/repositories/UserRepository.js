@@ -2,29 +2,29 @@ const {sql} = require("../config/db")
 
 exports.create = async (data) => {
     
-    const {usu_name, usu_last, usu_email, usu_tel, usu_pass} = data
-    await sql`INSERT INTO users (usu_name, usu_last, usu_email, usu_tel, usu_pass) VALUES (${usu_name}, ${usu_last}, ${usu_email}, ${usu_tel}, ${usu_pass})`
+    const {nombre, apellido, email, telefono, password} = data
+    await sql`INSERT INTO usuarios (nombre, apellido, email, telefono, password) VALUES (${nombre}, ${apellido}, ${email}, ${telefono}, ${password})`
 
 }
 
 exports.get = async (data) =>{
 
-    const {usu_email} = data
-    const [result] = await sql`SELECT * FROM users WHERE usu_email = ${usu_email}`
+    const {email} = data
+    const [result] = await sql`SELECT * FROM usuarios WHERE email = ${email}`
 
     return result
 }
 
-exports.getByEmail = async (usu_email) =>{
+exports.getByEmail = async (email) =>{
 
-    const [result] = await sql`SELECT * FROM users WHERE usu_email = ${usu_email}`
+    const [result] = await sql`SELECT * FROM usuarios WHERE email = ${email}`
 
     return result
 }
 
-exports.getByPhone = async (usu_tel) =>{
+exports.getByPhone = async (telefono) =>{
 
-    const [result] = await sql`SELECT * FROM users WHERE usu_tel = ${usu_tel}`
+    const [result] = await sql`SELECT * FROM usuarios WHERE telefono = ${telefono}`
 
     return result
 }

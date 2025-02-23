@@ -12,21 +12,21 @@ exports.RegisterService = async (data) =>{
         throw new Error(error.details[0].message)
     }
 
-    const validate_email = await getByEmail(value.usu_email)
+    const validate_email = await getByEmail(value.email)
 
     if (validate_email) {
         throw new Error("El correo ya esta en uso")
     }
 
-    const validate_phone = await getByPhone(value.usu_tel)
+    const validate_phone = await getByPhone(value.telefono)
 
     if (validate_phone) {
         throw new Error("El telefono ya esta en uso")
     }
 
     const salt  = bcrypt.genSaltSync(10)
-    const hashPass = bcrypt.hashSync(value.usu_pass, salt)
-    value.usu_pass = hashPass
+    const hashPass = bcrypt.hashSync(value.password, salt)
+    value.password = hashPass
 
     await create(value)
     
@@ -45,13 +45,13 @@ exports.LoginService = async (data) =>{
         throw new Error("El usuario no existe")
     }
 
-    const status = bcrypt.compareSync(value.usu_pass, user.usu_pass)
+    const status = bcrypt.compareSync(value.password, user.password)
 
     if (!status) {
         throw new Error("La contraseña no coincide")
     }
 
-    delete user.usu_pass
+    delete user.password
 
     // Generar token JWT
     const token = generateToken(user);
