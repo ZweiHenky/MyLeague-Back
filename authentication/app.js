@@ -4,6 +4,7 @@ const express = require('express')
 const UserRoutes = require('./routes/UserRoutes');
 const AuthRoutes = require('./routes/AuthRoutes');
 const LeagueRoutes = require('./routes/LeagueRoutes');
+const MatchRoutes = require('./routes/MatchRoutes');
 const errorMiddleware = require('./middlewares/errorMiddleware');
 
 
@@ -16,6 +17,7 @@ app.use(express.json());
 app.use('/api/users', UserRoutes);
 app.use('/api/auth', AuthRoutes);
 app.use("/api/Leagues", LeagueRoutes)
+app.use("/api/matchday", MatchRoutes)
 
 // Middleware de errores
 app.use(errorMiddleware.errorHandler);
